@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>MLCI Report</title>
+	<link rel="icon" type="image/png" href="favicon.png">
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="//storage.googleapis.com/code.getmdl.io/1.0.1/material.green-cyan.min.css"/>
+	<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic'>
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+	<script
+			src="https://code.jquery.com/jquery-3.2.1.js"
+			integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+			crossorigin="anonymous"></script>
+	<script
+			src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+			integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+			crossorigin="anonymous"></script>
+	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script src="//storage.googleapis.com/code.getmdl.io/1.0.1/material.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<script src="memDataProcessor.js"></script>
+	<script src="checkinProcessor.js"></script>
+</head>
+<body text="white" style="background-color: black">
+<div id="top">
+	<div id="title">
+		<img src="icon.png"/>
+		<h3>Check-in report</h3>
+	</div>
+	<div id="input-total">
+		<div id="input">
+			<div id="input-from">
+				<p>From</p>
+				<input class="mdl-textfield__input" type="date" id="input-date-from"/>
+			</div>
+			<div id="input-to">
+				<p> To</p>
+				<input class="mdl-textfield__input" type="date" id="input-date-to"/>
+			</div>
+		</div>
+		<button class="mdl-button mdl-button-white" onclick="refreshData()">
+			Refresh
+		</button>
+	</div>
+</div>
+<div id="tabbuttons">
+	<button class="mdl-button mdl-button--colored" onclick="openTab(this, 'workspan')">
+		Workspan
+	</button>
+	<button class="mdl-button mdl-button--colored" onclick="openTab(this, 'checkin')">Checkin
+	</button>
+	<button class="mdl-button mdl-button--colored" onclick="openTab(this, 'checkout')">
+		Checkout
+	</button>
+</div>
+<div id="tabs">
+	<div class="tab" id="tab_workspan">
+		<canvas id="chart_workspan" className="fill_parent"></canvas>
+	</div>
+	<div class="tab" id="tab_checkin">
+		<table id="table_checkin">
+			<thead>
+			<tr>
+			</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	<div class="tab" id="tab_checkout"></div>
+</div>
+</body>
+</html>
+
+<script>
+	var moment = moment();
+	var forceOffline = false;
+	var memData;
+	var checkInData;
+
+	init();
+	refreshData();
+
+	function init()
+	{
+		var prevMonthBeg = moment.clone().subtract(1, 'month').startOf('month');
+		var prevMonthEnd = prevMonthBeg.clone().endOf('month');
+		document.getElementById('input-date-from').value = prevMonthBeg.format('YYYY-MM-DD');
+		document.getElementById('input-date-to').value = prevMonthEnd.format('YYYY-MM-DD');
+		document.getElementById('tabbuttons').getElementsByTagName('*')[1].click();
+		checkInTableInit();
+	}
+
+	function refreshData()
+	{
+		memData = loadMemData();
+
+		var dateFrom = document.getElementById('input-date-from').value;
+		var dateTo = document.getElementById('input-date-to').value;
+		dateFrom = getTimeData(dateFrom);
+		dateTo = getTimeData(dateTo);
+
+		checkInData = loadCheckInData(memData, dateFrom, dateTo);
+	}
+
+	function getTimeData(dateField)
+	{
+		if (dateField == null || dateField == "" || dateField.length == 0)
+		{
+			dateField = moment.clone().subtract(1, 'month').startOf('month').format('DD/MM/YYYY');
+		}
+		else
+		{
+			dateField = dateField.split('-');
+			dateField = dateField[2] + '/' + dateField[1] + '/' + dateField[0];
+		}
+		return dateField;
+	}
+
+	function openTab(thisButton, name)
+	{
+		var tabbuttons = document.getElementById('tabbuttons');
+		var buttons = tabbuttons.getElementsByTagName('*');
+		for (var i = 0; i < buttons.length; i++)
+		{
+			var button = buttons[i];
+			if (button != thisButton)
+			{
+				button.classList.remove('mdl-button--colored');
+			}
+			else
+			{
+				button.classList.add('mdl-button--colored');
+			}
+		}
+
+		var tabsparent = document.getElementById('tabs');
+		var tabs = tabsparent.getElementsByClassName('tab');
+		for (var i = 0; i < tabs.length; i++)
+		{
+			var tab = tabs[i];
+			if (tab.id.includes(name)) tab.style.display = 'table-cell';
+			else tab.style.display = 'none';
+		}
+	}
+
+</script>

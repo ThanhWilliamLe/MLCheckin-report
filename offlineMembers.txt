@@ -1,0 +1,190 @@
+{
+    "s": true,
+    "d": [{
+        "_id": "582596f39df6282166aeac32",
+        "fullName": "Hoàng Đức Tuấn",
+        "nickName": "scorpion",
+        "timeFrame": {"to": {"minutes": 0, "hours": 18}, "from": {"minutes": 30, "hours": 8}},
+        "slackId": "U02EZ845V"
+    }, {
+        "_id": "582596f39df6282166aeac35",
+        "fullName": "Nguyễn Anh Đức",
+        "nickName": "Anh Đức",
+        "timeFrame": {"to": {"minutes": 30, "hours": 18}, "from": {"minutes": 0, "hours": 9}},
+        "slackId": "U06MJ9KN0"
+    }, {
+        "_id": "582596f39df6282166aeac36",
+        "fullName": "Nguyễn Thái Duy",
+        "nickName": "",
+        "timeFrame": {"to": {"minutes": 15, "hours": 18}, "from": {"minutes": 45, "hours": 8}},
+        "slackId": "U02EZ6VHV"
+    }, {
+        "_id": "582596f39df6282166aeac37",
+        "fullName": "Phan Thế Nhân",
+        "nickName": "Hiếp 14",
+        "timeFrame": {"to": {"minutes": 30, "hours": 18}, "from": {"minutes": 0, "hours": 9}},
+        "slackId": "U02EZ6VGZ"
+    }, {
+        "_id": "582596f39df6282166aeac38",
+        "fullName": "Trần Việt Dũng",
+        "nickName": "Dũng \"cảm\"",
+        "timeFrame": {"to": {"minutes": 30, "hours": 18}, "from": {"minutes": 0, "hours": 9}},
+        "slackId": "U02EZ70LZ"
+    }, {
+        "_id": "582596f39df6282166aeac39",
+        "fullName": "Phạm Quang Thắng",
+        "nickName": "",
+        "timeFrame": {"to": {"minutes": 0, "hours": 18}, "from": {"minutes": 30, "hours": 8}},
+        "slackId": "U025B16N5"
+    }, {
+        "_id": "582596f39df6282166aeac3a",
+        "fullName": "Đỗ Trịnh Minh Hoàng",
+        "nickName": "",
+        "timeFrame": {"to": {"minutes": 35, "hours": 18}, "from": {"minutes": 5, "hours": 9}},
+        "slackId": "U0492MK2Y"
+    }, {
+        "_id": "582596f39df6282166aeac3c",
+        "fullName": "Lê Văn Cương",
+        "nickName": "Tý",
+        "timeFrame": {"to": {"minutes": 0, "hours": 19}, "from": {"minutes": 30, "hours": 9}},
+        "slackId": "U04JM1VP6"
+    }, {
+        "_id": "582596f39df6282166aeac3e",
+        "fullName": "Tô Thành Công",
+        "nickName": "",
+        "timeFrame": {"to": {"minutes": 30, "hours": 18}, "from": {"minutes": 0, "hours": 9}},
+        "slackId": "U04549QMV"
+    }, {
+        "_id": "58e1b720f4b91f2b8253449c",
+        "fullName": "Nguyễn Tá Lợi",
+        "nickName": "Alpha men",
+        "timeFrame": {"to": {"minutes": 0, "hours": 19}, "from": {"minutes": 30, "hours": 9}},
+        "slackId": "U4SLW3GJD"
+    }, {
+        "_id": "597ade0da4955728d74753fb",
+        "fullName": "Phạm Đức Bình",
+        "nickName": "Bình Pê đê",
+        "timeFrame": {"to": {"minutes": 45, "hours": 17}, "from": {"minutes": 15, "hours": 8}},
+        "slackId": "U6ULV9BK9"
+    }, {
+        "_id": "5987cf67db4a1d4bd437a1b0",
+        "fullName": "Trần Phương Thuỷ",
+        "nickName": "Lão Tôn",
+        "timeFrame": {"to": {"minutes": 0, "hours": 19}, "from": {"minutes": 30, "hours": 9}},
+        "slackId": "U6JUVPRJ8"
+    }, {
+        "_id": "59925550684a7343ef1065c1",
+        "fullName": "Lê Tiến Thành",
+        "nickName": "",
+        "timeFrame": {"to": {"minutes": 0, "hours": 17}, "from": {"minutes": 0, "hours": 13}},
+        "slackId": "U6N3W3LAY"
+    }, {
+        "_id": "5993ab0a684a7343ef1065d3",
+        "fullName": "Hoàng Tùng Lâm",
+        "nickName": "Lâm Hoàng",
+        "timeFrame": {"to": {"minutes": 30, "hours": 18}, "from": {"minutes": 0, "hours": 9}},
+        "slackId": "U670PL30X"
+    }, {
+        "_id": "599a4453684a7343ef1065f8",
+        "fullName": "Nguyễn Thu Thảo",
+        "nickName": "",
+        "timeFrame": {"to": {"minutes": 30, "hours": 18}, "from": {"minutes": 0, "hours": 9}},
+        "slackId": "U6JTRC8TU"
+    }, {
+        "_id": "59b27d301db55116fba884b0",
+        "fullName": "Dương Huyền Thanh",
+        "nickName": "Xù Lông Bông",
+        "timeFrame": {"to": {"minutes": 0, "hours": 12}, "from": {"minutes": 0, "hours": 9}},
+        "slackId": "U6YRY43GD"
+    }, {
+        "_id": "59b27d611db55116fba884b1",
+        "fullName": "Vũ Phương Hạnh",
+        "nickName": "Meow Meow",
+        "timeFrame": {"to": {"minutes": 0, "hours": 17}, "from": {"minutes": 40, "hours": 13}},
+        "slackId": "U708NJ4GG"
+    }, {
+        "_id": "59b9e69fbe9ed25c6f7a9974",
+        "fullName": "Phạm Xuân Khoái",
+        "nickName": "Sướng",
+        "timeFrame": {"to": {"minutes": 0, "hours": 18}, "from": {"minutes": 0, "hours": 9}},
+        "slackId": "U160YL97G"
+    }, {
+        "_id": "5a0c152bd5da801404e31662",
+        "fullName": "Lều Thu Hoài",
+        "nickName": "",
+        "slackId": "U81GG2BP1",
+        "timeFrame": {"to": {"minutes": 40, "hours": 17}, "from": {"minutes": 10, "hours": 8}}
+    }, {
+        "_id": "5a12814ad5da801404e316cc",
+        "fullName": "Phạm Hồng Duy Quang",
+        "nickName": "",
+        "slackId": "U83P1QNLE",
+        "timeFrame": {"to": {"minutes": 30, "hours": 18}, "from": {"minutes": 0, "hours": 9}}
+    }, {
+        "_id": "5a14dfe8729e6576d8d18cd4",
+        "fullName": "Nguyễn Thùy Ly",
+        "nickName": "",
+        "slackId": "U7ZR0M9J8",
+        "timeFrame": {"to": {"minutes": 50, "hours": 11}, "from": {"minutes": 50, "hours": 8}}
+    }, {
+        "_id": "5a1bd1b53a0a4d61c4d87f40",
+        "fullName": "Lê Thị Lan Anh",
+        "nickName": "",
+        "slackId": "U856F5JG1",
+        "timeFrame": {"to": {"minutes": 40, "hours": 17}, "from": {"minutes": 10, "hours": 8}}
+    }, {
+        "_id": "5a372d35414baf3de8250a3e",
+        "fullName": "Đào Mạnh Linh",
+        "nickName": "",
+        "slackId": "U8G5D87D3",
+        "timeFrame": {"to": {"minutes": 0, "hours": 18}, "from": {"minutes": 30, "hours": 8}}
+    }, {
+        "_id": "5a372d6f414baf3de8250a3f",
+        "fullName": "Phạm Văn Nam",
+        "nickName": "Nam Doraemon",
+        "slackId": "U8FFC5U0Z",
+        "timeFrame": {"to": {"minutes": 0, "hours": 18}, "from": {"minutes": 30, "hours": 8}}
+    }, {
+        "_id": "5a373d30414baf3de8250a41",
+        "fullName": "Phạm Anh Đức",
+        "nickName": "",
+        "slackId": "U8G1F3QDQ",
+        "timeFrame": {"to": {"minutes": 0, "hours": 12}, "from": {"minutes": 0, "hours": 9}}
+    }, {
+        "_id": "5a373d51414baf3de8250a42",
+        "fullName": "Nguyễn Thu Hà",
+        "nickName": "",
+        "slackId": "U8GSW17RU",
+        "timeFrame": {"to": {"minutes": 0, "hours": 12}, "from": {"minutes": 0, "hours": 9}}
+    }, {
+        "_id": "5a373d78414baf3de8250a43",
+        "fullName": "Nguyễn Hữu Lộc",
+        "nickName": "Leo",
+        "slackId": "U8FFND1EV",
+        "timeFrame": {"to": {"minutes": 0, "hours": 12}, "from": {"minutes": 0, "hours": 9}}
+    }, {
+        "_id": "5a388be6414baf3de8250a65",
+        "fullName": "Bùi Trần Thu Thủy",
+        "nickName": "",
+        "slackId": "U8H7L7QKE",
+        "timeFrame": {"to": {"minutes": 0, "hours": 12}, "from": {"minutes": 0, "hours": 9}}
+    }, {
+        "_id": "5a40b0ced1851e4fa8a4cf80",
+        "fullName": "Vương Quang Tuyên",
+        "nickName": "",
+        "slackId": "U8K74NAHK",
+        "timeFrame": {"to": {"minutes": 30, "hours": 18}, "from": {"minutes": 0, "hours": 9}}
+    }, {
+        "_id": "5a40b12cd1851e4fa8a4cf81",
+        "fullName": "Nguyễn Thành Đạt",
+        "nickName": "",
+        "slackId": "U8JCZN61E",
+        "timeFrame": {"to": {"minutes": 30, "hours": 18}, "from": {"minutes": 0, "hours": 9}}
+    }, {
+        "_id": "5a4f33994498da3695303d97",
+        "fullName": "Bùi Thị Phương Linh",
+        "nickName": "",
+        "slackId": "",
+        "timeFrame": {"to": {"minutes": 0, "hours": 18}, "from": {"minutes": 30, "hours": 8}}
+    }]
+}

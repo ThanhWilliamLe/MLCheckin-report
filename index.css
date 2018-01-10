@@ -1,0 +1,124 @@
+/*https://coolors.co/000000-f06543-4caf50-70cee2-ffffff*/
+
+body
+{
+	display: table;
+}
+
+#top
+{
+	width: 100%;
+	height: auto;
+	background: seagreen;
+	padding: 2em 0 2em 0;
+	display: inline-flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#top > #title
+{
+	display: inline-flex;
+	justify-content: space-around;
+	height: 5em;
+	align-items: center;
+}
+
+#top > #title > img
+{
+	width: auto;
+	height: 100%;
+}
+
+#top > #title > h3
+{
+	margin: 0;
+	padding-left: 1em;
+}
+
+#top > button
+{
+	height: inherit;
+}
+
+#input-total
+{
+	display: inline-flex;
+}
+
+#input-total > .mdl-button-white
+{
+	color: white;
+}
+
+#input > div
+{
+	align-items: baseline;
+}
+
+#input > div > *
+{
+	width: auto;
+	display: inline-block;
+	margin: 0;
+	padding: 0 0.25em 0 0.25em;
+}
+
+#tabbuttons
+{
+	background: white;
+	display: inline-flex;
+	width: 100%;
+	height: auto;
+	justify-content: space-around;
+}
+
+#tabs
+{
+	display: table-row;
+	width: 100%;
+	height: 100%;
+}
+
+#tabs > .tab
+{
+	display: table-cell;
+	width: 100%;
+	height: 100%;
+	padding: 1em 2em 0 2em;
+}
+
+#table_checkin
+{
+	width: 100%;
+	margin: 0;
+}
+#table_checkin td
+{
+	color: black;
+	text-align: center;
+}
+#table_checkin thead tr
+{
+	background-color: seagreen;
+}
+#table_checkin tbody .even
+{
+	background-color: white;
+}
+#table_checkin tbody .odd
+{
+	background-color: #e9e9e9;
+}
+#table_checkin tbody .even .sorting_1,
+#table_checkin tbody .even .sorting_2,
+#table_checkin tbody .even .sorting_3
+{
+	background-color: #fcfccf;
+}
+#table_checkin tbody .odd .sorting_1,
+#table_checkin tbody .odd .sorting_2,
+#table_checkin tbody .odd .sorting_3
+{
+	background-color: #f5f5b7;
+}
