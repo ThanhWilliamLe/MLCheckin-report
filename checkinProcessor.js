@@ -18,7 +18,7 @@ function checkInTableInit()
 		paging: false,
 		columns: [
 			{title: "Rank", data: "rank"},
-			{title: "Name", data: "name", width: "20%"},
+			{title: "Member Name", data: "name"},
 			{title: "Fulltime", data: "fullTime"},
 			{title: "Checkins", data: "checkIns"},
 			{title: "Days off", data: "offDays"},
@@ -29,22 +29,36 @@ function checkInTableInit()
 				return data + 'm';
 			}
 			},
-			{title: "Score", data: "score"}
+			{
+				title: "Commited hours", data: "commitment"
+			},
+			{
+				title: "Actual hours", data: "actual"
+			},
+			{
+				title: "Score", data: "score", render: function (data, type, row)
+			{
+				return data + '%';
+			}
+			}
 		],
-		order: [[7, 'desc']],
+		order: [[9, 'desc']],
+		columnDefs:
+			[
+				{className: "dt-body-left", targets: [1, 2]},
+				{className: "dt-body-right", targets: [0, 3, 4, 5, 6, 7, 8, 9]}
+			]
 	});
 	table.css('width', '100%');
 
 	var tableFilter = document.getElementById('table_checkin_filter');
-	tableFilter.style.width = '100%';
-	tableFilter.style['margin-top'] = '1em';
-	tableFilter.style['margin-bottom'] = '1em';
-	tableFilter.firstChild.style.width = '100%';
-	tableFilter.firstChild.style.margin = '0';
-	tableFilter.firstChild.style.color = 'white';
-	tableFilter.firstChild.getElementsByTagName('input')[0].style.width = '33%';
+	tableFilter.firstChild.style.margin = 'auto 0 auto 0';
+	tableFilter.firstChild.style.color = 'black';
+	tableFilter.firstChild.getElementsByTagName('input')[0].style.width = '20dp';
+	tableFilter.insertBefore(document.getElementById('button_hideshow_columns'), tableFilter.firstChild);
 
 	document.getElementById('table_checkin_info').style.display = 'none';
+
 }
 
 function loadCheckInData(data, from, to)
@@ -83,6 +97,8 @@ function processCheckin(data, json)
 			checkIns: [],
 			lateDays: 0,
 			lateSum: 0,
+			commitment: 0,
+			actual: 0,
 			score: 0
 		};
 	});
@@ -106,20 +122,23 @@ function processCheckin(data, json)
 				{
 					if (memData.checkIns[day] == null)
 					{
-						memData.score += 12.5 * memData.workSpan;
+						memData.actual += memData.workSpan;
 						memData.checkIns[day] = true;
 						var lateMins = (hour - memData.startWork) * 60;
 						if (lateMins > 0)
 						{
 							memData.lateDays++;
 							memData.lateSum += lateMins;
-							memData.score -= 10 + lateMins;
+							memData.actual -= lateMins / 60;
 						}
+						memData.actual = Math.round(memData.actual * 10) / 10;
 					}
 				}
 			}
 		}
 	});
+
+	var workDays = workDaysInPeriod();
 
 	data.forEach(function (eachMem)
 	{
@@ -128,7 +147,9 @@ function processCheckin(data, json)
 		{
 			memData.offDays = Object.keys(memData.offDays).length;
 			memData.checkIns = Object.keys(memData.checkIns).length;
-			memData.score = Math.round(memData.score);
+
+			memData.commitment = workDays * memData.workSpan;
+			memData.score = Math.round(memData.actual / memData.commitment * 1000) / 10;
 		}
 	});
 	return result;
@@ -158,4 +179,22 @@ function loadDataToTable(data)
 	table.clear();
 	table.rows.add(tableData);
 	table.draw();
+}
+
+function workDaysInPeriod()
+{
+	var dateFrom = document.getElementById('input-date-from').value;
+	var dateTo = document.getElementById('input-date-to').value;
+	dateFrom = new Date(dateFrom);
+	dateTo = new Date(dateTo);
+
+	var workDays = 0;
+
+	while (dateFrom <= dateTo)
+	{
+		if (dateFrom.getDay() != 0 && dateFrom.getDay() != 6) workDays++;
+		dateFrom.setTime(dateFrom.getTime() + 1 * 24 * 60 * 60 * 1000);
+	}
+
+	return workDays;
 }

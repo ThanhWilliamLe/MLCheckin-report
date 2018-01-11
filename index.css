@@ -46,9 +46,10 @@ body
 	display: inline-flex;
 }
 
-#input-total > .mdl-button-white
+#input-total .mdl-button-white
 {
 	color: white;
+	height: inherit;
 }
 
 #input > div
@@ -64,9 +65,15 @@ body
 	padding: 0 0.25em 0 0.25em;
 }
 
+#input-from, #input-to
+{
+	display: flex;
+	justify-content: space-between;
+}
+
 #tabbuttons
 {
-	background: white;
+	background: #dddddd;
 	display: inline-flex;
 	width: 100%;
 	height: auto;
@@ -96,7 +103,7 @@ body
 #table_checkin td
 {
 	color: black;
-	text-align: center;
+	/*text-align: right;*/
 }
 #table_checkin thead tr
 {
@@ -121,4 +128,13 @@ body
 #table_checkin tbody .odd .sorting_3
 {
 	background-color: #f5f5b7;
+}
+
+#table_checkin_filter
+{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin: 1em 0 1em 0;
+
 }

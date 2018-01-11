@@ -25,7 +25,7 @@
 	<script src="memDataProcessor.js"></script>
 	<script src="checkinProcessor.js"></script>
 </head>
-<body text="white" style="background-color: black">
+<body text="white" style="background-color: white">
 <div id="top">
 	<div id="title">
 		<img src="icon.png"/>
@@ -38,8 +38,16 @@
 				<input class="mdl-textfield__input" type="date" id="input-date-from"/>
 			</div>
 			<div id="input-to">
-				<p> To</p>
+				<p>To</p>
 				<input class="mdl-textfield__input" type="date" id="input-date-to"/>
+			</div>
+			<div id="input-quick">
+				<button class="mdl-button mdl-button-white" onclick="setMonth(0)">
+					Previous month
+				</button>
+				<button class="mdl-button mdl-button-white" onclick="setMonth(-1)">
+					This month
+				</button>
 			</div>
 		</div>
 		<button class="mdl-button mdl-button-white" onclick="refreshData()">
@@ -62,6 +70,10 @@
 		<canvas id="chart_workspan" className="fill_parent"></canvas>
 	</div>
 	<div class="tab" id="tab_checkin">
+
+		<button id="button_hideshow_columns" class="mdl-button mdl-button--colored" onclick="tableColumnHideShow()">
+			Simple table
+		</button>
 		<table id="table_checkin">
 			<thead>
 			<tr>
@@ -79,6 +91,7 @@
 <script>
 	var moment = moment();
 	var forceOffline = false;
+	var detailed = true;
 	var memData;
 	var checkInData;
 
@@ -87,12 +100,10 @@
 
 	function init()
 	{
-		var prevMonthBeg = moment.clone().subtract(1, 'month').startOf('month');
-		var prevMonthEnd = prevMonthBeg.clone().endOf('month');
-		document.getElementById('input-date-from').value = prevMonthBeg.format('YYYY-MM-DD');
-		document.getElementById('input-date-to').value = prevMonthEnd.format('YYYY-MM-DD');
+		setMonth(0);
 		document.getElementById('tabbuttons').getElementsByTagName('*')[1].click();
 		checkInTableInit();
+		tableColumnHideShow();
 	}
 
 	function refreshData()
@@ -145,6 +156,27 @@
 			var tab = tabs[i];
 			if (tab.id.includes(name)) tab.style.display = 'table-cell';
 			else tab.style.display = 'none';
+		}
+	}
+
+	function setMonth(offset)
+	{
+		var prevMonthBeg = moment.clone().subtract(offset + 1, 'month').startOf('month');
+		var prevMonthEnd = prevMonthBeg.clone().endOf('month');
+		prevMonthBeg = moment.clone().max(prevMonthBeg, moment.clone());
+		prevMonthEnd = moment.clone().max(prevMonthEnd, moment.clone());
+		document.getElementById('input-date-from').value = prevMonthBeg.format('YYYY-MM-DD');
+		document.getElementById('input-date-to').value = prevMonthEnd.format('YYYY-MM-DD');
+	}
+
+	function tableColumnHideShow()
+	{
+		var checkInTable = $("#table_checkin").DataTable();
+		detailed = !detailed;
+		document.getElementById('button_hideshow_columns').innerHTML = "Switch to " + (detailed ? "Simple" : "Detailed") + " table";
+		for (var i = 2; i <= 6; i++)
+		{
+			checkInTable.column(i).visible(detailed);
 		}
 	}
 
