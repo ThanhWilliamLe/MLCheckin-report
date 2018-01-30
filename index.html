@@ -5,11 +5,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>MLCI Report</title>
 	<link rel="icon" type="image/png" href="favicon.png">
-	<link rel="stylesheet" type="text/css" href="index.css">
+	<link rel="stylesheet" href="index.css">
 	<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="//storage.googleapis.com/code.getmdl.io/1.0.1/material.green-cyan.min.css"/>
-	<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic'>
-	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic'>
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
 	<script
 			src="https://code.jquery.com/jquery-3.2.1.js"
 			integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
@@ -42,54 +42,65 @@
 				<input class="mdl-textfield__input" type="date" id="input-date-to"/>
 			</div>
 			<div id="input-quick">
-				<button class="mdl-button mdl-button-white" onclick="setMonth(0)">
-					Previous month
-				</button>
-				<button class="mdl-button mdl-button-white" onclick="setMonth(-1)">
-					This month
-				</button>
+				<button class="mdl-button mdl-button-white" onclick="setMonth(0)">Previous month</button>
+				<button class="mdl-button mdl-button-white" onclick="setMonth(-1)">This month</button>
 			</div>
 		</div>
-		<button class="mdl-button mdl-button-white" onclick="refreshData()">
-			Refresh
-		</button>
+		<button class="mdl-button mdl-button-white" onclick="refreshData()">Refresh</button>
 	</div>
 </div>
 <div id="tabbuttons">
-	<button class="mdl-button mdl-button--colored" onclick="openTab(this, 'workspan')">
-		Workspan
-	</button>
-	<button class="mdl-button mdl-button--colored" onclick="openTab(this, 'checkin')">Checkin
-	</button>
-	<button class="mdl-button mdl-button--colored" onclick="openTab(this, 'checkout')">
-		Checkout
-	</button>
+	<button class="mdl-button mdl-button--colored" onclick="openTab(this, 'workspan')">Workspan</button>
+	<button class="mdl-button mdl-button--colored" onclick="openTab(this, 'checkin')">Checkin</button>
+	<button class="mdl-button mdl-button--colored" onclick="openTab(this, 'checkout')">Checkout</button>
 </div>
 <div id="tabs">
 	<div class="tab" id="tab_workspan">
 		<canvas id="chart_workspan" className="fill_parent"></canvas>
 	</div>
 	<div class="tab" id="tab_checkin">
-
 		<button id="button_hideshow_columns" class="mdl-button mdl-button--colored" onclick="tableColumnHideShow()">
 			Simple table
 		</button>
 		<table id="table_checkin">
 			<thead>
+			<tr></tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+
+		<table id="table_score_formulas">
+			<thead>
 			<tr>
+				<th width="30%">Scoring formulas</th>
+				<th width="70%">Description</th>
 			</tr>
 			</thead>
 			<tbody>
+			<tr class="even">
+				<td>Formula 1 (current)</td>
+				<td>Score = Actual hours / Committed hours. <br/>
+					Actual hours = Registered workspan x Days checked in - Late time. <br/>
+					Commited hours = Workdays (Mon to Sat) x 8 hours (or 4 hours for part-time).
+					Saturday counts as half a day.
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>Formula 2</td>
+				<td>ACB</td>
+			</tr>
 			</tbody>
 		</table>
 	</div>
-	<div class="tab" id="tab_checkout"></div>
+	<div class="tab" id="tab_checkout">
+		<h2>Khi nào việc check-out được thực hiện nghiêm chỉnh thì khi đó thông tin sẽ hiện ra đây.</h2>
+	</div>
 </div>
 </body>
 </html>
 
 <script>
-	var moment = moment();
+	var mmt = moment();
 	var forceOffline = false;
 	var detailed = true;
 	var memData;
@@ -122,7 +133,7 @@
 	{
 		if (dateField == null || dateField == "" || dateField.length == 0)
 		{
-			dateField = moment.clone().subtract(1, 'month').startOf('month').format('DD/MM/YYYY');
+			dateField = mmt.clone().subtract(1, 'month').startOf('month').format('DD/MM/YYYY');
 		}
 		else
 		{
@@ -161,10 +172,10 @@
 
 	function setMonth(offset)
 	{
-		var prevMonthBeg = moment.clone().subtract(offset + 1, 'month').startOf('month');
+		var prevMonthBeg = mmt.clone().subtract(offset + 1, 'month').startOf('month');
 		var prevMonthEnd = prevMonthBeg.clone().endOf('month');
-		prevMonthBeg = moment.clone().max(prevMonthBeg, moment.clone());
-		prevMonthEnd = moment.clone().max(prevMonthEnd, moment.clone());
+		prevMonthBeg = moment.min(prevMonthBeg, mmt.clone());
+		prevMonthEnd = moment.min(prevMonthEnd, mmt.clone());
 		document.getElementById('input-date-from').value = prevMonthBeg.format('YYYY-MM-DD');
 		document.getElementById('input-date-to').value = prevMonthEnd.format('YYYY-MM-DD');
 	}

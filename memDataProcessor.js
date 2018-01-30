@@ -90,9 +90,9 @@ function createChartFromData(data)
 				{
 					title:
 						{
-							display: true,
+							display: false,
 							text: "Registered workspan",
-							fontColor: '#fff',
+							fontColor: '#000',
 							fontSize: 15
 						},
 					legend: {display: false},

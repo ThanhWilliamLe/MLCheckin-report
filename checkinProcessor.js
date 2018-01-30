@@ -25,21 +25,21 @@ function checkInTableInit()
 			{title: "Late days", data: "lateDays"},
 			{
 				title: "Late total", data: "lateSum", render: function (data, type, row)
-			{
-				return data + 'm';
-			}
+				{
+					return data + 'm';
+				}
 			},
 			{
-				title: "Commited hours", data: "commitment"
+				title: "Committed hours", data: "commitment"
 			},
 			{
 				title: "Actual hours", data: "actual"
 			},
 			{
 				title: "Score", data: "score", render: function (data, type, row)
-			{
-				return data + '%';
-			}
+				{
+					return data + '%';
+				}
 			}
 		],
 		order: [[9, 'desc']],
@@ -63,7 +63,8 @@ function checkInTableInit()
 
 function loadCheckInData(data, from, to)
 {
-	var result = processCheckin(data, offlineCheckInData())
+	var checkout = loadCheckOutData(data, from, to);
+	var result = processCheckin(data, offlineCheckInData(), checkout);
 	if (navigator.onLine && !forceOffline)
 	{
 		var xhttp = new XMLHttpRequest();
@@ -74,13 +75,37 @@ function loadCheckInData(data, from, to)
 			"startDate": from,
 			"endDate": to
 		}));
-		result = processCheckin(data, JSON.parse(xhttp.responseText));
+		result = processCheckin(data, JSON.parse(xhttp.responseText), checkout);
 	}
 	loadDataToTable(result);
 	return result;
 }
 
-function processCheckin(data, json)
+function loadCheckOutData(data, from, to)
+{
+	var result = "";//processCheckin(data, offlineCheckInData())
+	if (navigator.onLine && !forceOffline)
+	{
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "https://dashboard.moneylover.me/checkout/logsInPeriod", false);
+		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.send(JSON.stringify({
+			"idMember": "",
+			"startDate": from,
+			"endDate": to
+		}));
+		console.log(xhttp.responseText);
+		//result = processCheckout(JSON.parse(xhttp.responseText));
+	}
+	return result;
+}
+
+function processCheckout(json)
+{
+	console.log(json);
+}
+
+function processCheckin(data, json, checkout)
 {
 	var result = {};
 	var jsonData = json.d;
@@ -147,8 +172,7 @@ function processCheckin(data, json)
 		{
 			memData.offDays = Object.keys(memData.offDays).length;
 			memData.checkIns = Object.keys(memData.checkIns).length;
-
-			memData.commitment = workDays * memData.workSpan;
+			memData.commitment = workDays * (memData.fullTime ? 8 : 4);
 			memData.score = Math.round(memData.actual / memData.commitment * 1000) / 10;
 		}
 	});
@@ -192,7 +216,8 @@ function workDaysInPeriod()
 
 	while (dateFrom <= dateTo)
 	{
-		if (dateFrom.getDay() != 0 && dateFrom.getDay() != 6) workDays++;
+		if (dateFrom.getDay() == 6) workDays += 0.5;
+		if (dateFrom.getDay() != 0) workDays++;
 		dateFrom.setTime(dateFrom.getTime() + 1 * 24 * 60 * 60 * 1000);
 	}
 

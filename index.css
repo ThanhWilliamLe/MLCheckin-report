@@ -34,6 +34,7 @@ body
 {
 	margin: 0;
 	padding-left: 1em;
+	text-transform: uppercase;
 }
 
 #top > button
@@ -95,34 +96,74 @@ body
 	padding: 1em 2em 0 2em;
 }
 
+#tabs h2
+{
+	color: black;
+}
+
+#table_score_formulas
+{
+	margin: 2em 0 2em 0;
+	width: 100%;
+	border-collapse: collapse;
+	color: black;
+}
+#table_score_formulas th
+{
+	border-bottom: 1px solid black;
+	background-color: seagreen;
+	color: white;
+	padding: 0.75em;
+}
+#table_score_formulas td
+{
+	padding: 0.75em;
+}
+#table_score_formulas .even
+{
+	background-color: white;
+}
+
+#table_score_formulas .odd
+{
+	background-color: #e9e9e9;
+}
+
 #table_checkin
 {
 	width: 100%;
 	margin: 0;
+	border: 0;
 }
+
 #table_checkin td
 {
 	color: black;
 	/*text-align: right;*/
 }
+
 #table_checkin thead tr
 {
 	background-color: seagreen;
 }
+
 #table_checkin tbody .even
 {
 	background-color: white;
 }
+
 #table_checkin tbody .odd
 {
 	background-color: #e9e9e9;
 }
+
 #table_checkin tbody .even .sorting_1,
 #table_checkin tbody .even .sorting_2,
 #table_checkin tbody .even .sorting_3
 {
 	background-color: #fcfccf;
 }
+
 #table_checkin tbody .odd .sorting_1,
 #table_checkin tbody .odd .sorting_2,
 #table_checkin tbody .odd .sorting_3
