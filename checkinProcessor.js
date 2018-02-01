@@ -24,10 +24,7 @@ function checkInTableInit()
 			{title: "Days off", data: "offDays"},
 			{title: "Late days", data: "lateDays"},
 			{
-				title: "Late total", data: "lateSum", render: function (data, type, row)
-				{
-					return data + 'm';
-				}
+				title: "Sum late mins", data: "lateSum"
 			},
 			{
 				title: "Committed hours", data: "commitment"
@@ -94,15 +91,25 @@ function loadCheckOutData(data, from, to)
 			"startDate": from,
 			"endDate": to
 		}));
-		console.log(xhttp.responseText);
-		//result = processCheckout(JSON.parse(xhttp.responseText));
+		result = processCheckout(JSON.parse(xhttp.responseText));
 	}
 	return result;
 }
 
 function processCheckout(json)
 {
-	console.log(json);
+	var result = {};
+	var jsonData = json.d;
+
+	jsonData.forEach(function (checkOut)
+	{
+		var day = checkOut.timeCheckout.substring(0, 11);
+		var hour = checkOut.timeCheckout.substring(11, 19);
+		hour = 7 + parseFloat(hour.substring(0, 2)) + parseFloat(hour.substring(3, 5)) / 60 + parseFloat(hour.substring(6, 8)) / 3600;
+		var id = checkOut.memberKey._id;
+		result[id + "@" + day] = hour;
+	});
+	return result;
 }
 
 function processCheckin(data, json, checkout)
@@ -147,16 +154,22 @@ function processCheckin(data, json, checkout)
 				{
 					if (memData.checkIns[day] == null)
 					{
-						memData.actual += memData.workSpan;
+						var workSpan = memData.workSpan;
+						var checkOutId = checkIn.memberKey._id + "@" + day;
+						if (checkout[checkOutId] != null)
+						{
+							workSpan = Math.max(0, checkout[checkOutId] - hour);
+						}
+						memData.actual += workSpan;
 						memData.checkIns[day] = true;
 						var lateMins = (hour - memData.startWork) * 60;
 						if (lateMins > 0)
 						{
 							memData.lateDays++;
 							memData.lateSum += lateMins;
-							memData.actual -= lateMins / 60;
+							if (checkout[checkOutId] == null) memData.actual -= lateMins / 60;
 						}
-						memData.actual = Math.round(memData.actual * 10) / 10;
+						memData.actual = Math.max(0, Math.round(memData.actual * 10) / 10);
 					}
 				}
 			}
