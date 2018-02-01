@@ -31,9 +31,14 @@ function getMemData(json)
 
 		var startWork = mem.timeFrame.from.hours + mem.timeFrame.from.minutes / 60;
 		var toNoon = 12 - startWork;
-		var fromNoon = mem.timeFrame.to.hours + mem.timeFrame.to.minutes / 60 - 13.5;
+		var endWork = mem.timeFrame.to.hours + mem.timeFrame.to.minutes / 60;
+		var fromNoon = endWork - 13.5;
 		var workTotal = Math.max(0, toNoon) + Math.max(0, fromNoon);
 		var workSpan = Math.round(workTotal * 100) / 100;
+		if (startWork > 12 || endWork < 13.5)
+		{
+			workSpan = endWork - startWork;
+		}
 
 		data.push({
 			name: mem.name,
